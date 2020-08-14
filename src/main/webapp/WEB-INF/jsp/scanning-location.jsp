@@ -12,64 +12,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <%@include file="common/include.jsp"%>
-<script>
-	$(document).ready(function() {
-		// Activate tooltips
-		$('[data-toggle="tooltip"]').tooltip();
 
-		// Filter table rows based on searched term
-		$("#search").on("keyup", function() {
-			var term = $(this).val().toLowerCase();
-			$("table tbody tr").each(function() {
-				$row = $(this);
-				var name = $row.find("td:nth-child(2)").text().toLowerCase();
-				console.log(name);
-				if (name.search(term) < 0) {
-					$row.hide();
-				} else {
-					$row.show();
-				}
-			});
-		});
-	});
-	 function mypopup(url) {
-         width = window.screen.width;
-         height = window.screen.height;
-         mywindow = window.open(url, "Title",
-             "location=0,status=1,scrollbars=1,resizable=1,menubar=0,toolbar=no,width="
-                         + width + ",height=" + height);
-         mywindow.moveTo(0, 0);
-         mywindow.focus();
-     }
-	 function openForm() {
-		  document.getElementById("uploadForm").style.display = "block";
-		}
-
-		function closeForm() {
-		  document.getElementById("uploadForm").style.display = "none";
-		}
-</script>
-<script>
-	$(document).ready(function() {
-		// Activate tooltips
-		$('[data-toggle="tooltip"]').tooltip();
-
-		// Filter table rows based on searched term
-		$("#search").on("keyup", function() {
-			var term = $(this).val().toLowerCase();
-			$("table tbody tr").each(function() {
-				$row = $(this);
-				var name = $row.find("td:nth-child(2)").text().toLowerCase();
-				console.log(name);
-				if (name.search(term) < 0) {
-					$row.hide();
-				} else {
-					$row.show();
-				}
-			});
-		});
-	});
-</script>
 </head>
 <body>
 	<!-- Header Area Start -->
@@ -92,7 +35,7 @@
 								<div class="col-sm-6 action-icon">
 									<a href="#" class="add" title="Add" onclick='mypopup("/add-location");return false;'
 										data-toggle="Add Scanning Location"><i
-										class="material-icons">add</i></a> <a href="#" class="import"
+										class="material-icons">add</i></a> <a href="#" id="exportLocationsReportInExcel" class="import"
 										title="Import" data-toggle="Import Scanning Location"><i
 										class="material-icons">file_download</i></a> <a href="#"
 										onclick="openForm()" class="export" title="Export"

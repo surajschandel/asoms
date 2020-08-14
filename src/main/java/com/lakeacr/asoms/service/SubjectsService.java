@@ -2,6 +2,9 @@ package com.lakeacr.asoms.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import com.lakeacr.asoms.domain.Subjects;
@@ -44,5 +47,12 @@ public interface SubjectsService {
 	 * @return
 	 */
 	String uploadCsvFileData(MultipartFile file, Long userId) ;
+	
+	/**
+	 * 
+	 * @param request
+	 * @param response
+	 */
+	void export(HttpServletRequest request, HttpServletResponse response);
 
 }
