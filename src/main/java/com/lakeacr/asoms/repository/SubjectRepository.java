@@ -15,4 +15,8 @@ public interface SubjectRepository extends CrudRepository<Subjects, Long>  {
 	@Query("SELECT l FROM Subjects l WHERE l.isDeleted = 0")
 	List<Subjects> findActiveSubjects();
 	
+	@Query("SELECT COUNT(l) FROM Subjects l WHERE l.isDeleted = 0")
+	int activeCount();
+	
+	
 }

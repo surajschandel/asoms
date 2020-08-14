@@ -49,6 +49,12 @@ public class SubjectsDaoImpl implements SubjectsDao {
 		return (List<Subjects>) subjectsRepo.saveAll(subjects);
 	}
 
+	@Override
+	public int countActive() {
+		int count= subjectsRepo.activeCount();
+		return count;
+	}
+
 	
 
 }

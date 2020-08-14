@@ -55,6 +55,11 @@ public class LocationDaoImpl implements LocationDao {
 		return (List<Locations>) locationRepo.saveAll(scanningLocation);
 	}
 
+	@Override
+	public int countActive() {
+		int count= locationRepo.activeCount();
+		return count;
+	}
 	
 
 }

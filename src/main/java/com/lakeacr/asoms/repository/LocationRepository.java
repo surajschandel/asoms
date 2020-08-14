@@ -14,5 +14,8 @@ public interface LocationRepository extends CrudRepository<Locations, Long> {
 	
 	@Query("SELECT l FROM Locations l WHERE l.isDeleted = 0")
 	List<Locations> findActiveLocations();
+	
+	@Query("SELECT COUNT(l) FROM Locations l WHERE l.isDeleted = 0")
+	int activeCount();
 
 }
