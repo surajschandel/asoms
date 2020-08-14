@@ -13,6 +13,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +25,9 @@ import org.springframework.web.multipart.MultipartFile;
 import com.lakeacr.asoms.dao.SubjectsDao;
 import com.lakeacr.asoms.domain.Subjects;
 import com.lakeacr.asoms.domain.User;
+import com.lakeacr.asoms.dto.ExportPdfDataDTO;
+import com.lakeacr.asoms.utils.ExportExcelDataHadlerUtil;
+import com.lakeacr.asoms.utils.ExportExcelUtils;
 
 /**
  * @author SURAJ CHANDEL
@@ -106,6 +112,24 @@ public class SubjectsServiceImpl implements SubjectsService {
 		String subject = metadata[1];
 		String code = metadata[2];
 		return new Subjects(subject, code, new Date(),userId,true,false);
+	}
+
+	@Override
+	public void export(HttpServletRequest request, HttpServletResponse response) {
+		ExportPdfDataDTO dataDTO = new ExportPdfDataDTO();
+		dataDTO.setFileName("subject_list");
+        dataDTO.setHeading("Subject List");
+        dataDTO.getTableHeading().add("Subject Name");
+        dataDTO.getTableHeading().add("Subject Code");
+		List<Subjects> subjects=subjectsDao.findAll();
+		for (Subjects subject : subjects) {
+			ArrayList<Object> arrayList = new ArrayList<Object>();
+			arrayList.add(subject.getSubjectName());
+            arrayList.add(subject.getSubjectCode());
+            dataDTO.getData().add(arrayList);
+		}
+		ExportExcelUtils.downloadExcelFile(request, response, ExportExcelDataHadlerUtil.prepareExcelExportCommand(dataDTO));
+		
 	}
 
 }

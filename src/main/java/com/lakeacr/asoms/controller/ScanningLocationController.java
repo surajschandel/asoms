@@ -2,6 +2,9 @@ package com.lakeacr.asoms.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,5 +92,9 @@ private static final Logger LOG = LoggerFactory.getLogger(ScanningLocationContro
 			LOG.error("Some server error: " , e);
 			model.addAttribute("error", "Some error ocurs");
 		}
+	}
+	@RequestMapping("/export-locations")
+	public void export(HttpServletRequest request, HttpServletResponse response) {
+		locationService.export(request, response);
 	}
 }

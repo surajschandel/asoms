@@ -3,6 +3,9 @@ package com.lakeacr.asoms.controller;
 import java.security.Principal;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,5 +95,9 @@ public class SubjectsController {
 			model.addAttribute("error", "Some error ocurs");
 		}
 		return "subjects";
+	}
+	@RequestMapping("/export-subjects")
+	public void export(HttpServletRequest request, HttpServletResponse response) {
+		subjectsService.export(request, response);
 	}
 }
