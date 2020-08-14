@@ -44,15 +44,12 @@
 							<p class="count-text ">Evaluation Center Count</p>
 						</div>
 					</div>
-
-
-
 				</div>
 				<div class="col-md-3 col-sm-6 col-xs-12">
 					<div class="col">
 						<div class="counter">
-							<i class="fa fa-coffee fa-2x"></i>
-							<h2 class="timer count-title count-number" data-to="1700"
+							<i class="fa fa-book fa-2x"></i>
+							<h2 class="timer count-title count-number" data-to="${counts.subjects}"
 								data-speed="1500"></h2>
 							<p class="count-text ">Subjects Count</p>
 						</div>
@@ -62,7 +59,7 @@
 					<div class="col">
 						<div class="counter">
 							<i class="fa fa-lightbulb-o fa-2x"></i>
-							<h2 class="timer count-title count-number" data-to="11900"
+							<h2 class="timer count-title count-number" data-to="${counts.locations}"
 								data-speed="1500"></h2>
 							<p class="count-text ">Answer Scripts Count</p>
 						</div>

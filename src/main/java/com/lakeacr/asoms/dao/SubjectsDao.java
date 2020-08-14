@@ -35,5 +35,12 @@ public interface SubjectsDao {
 	 * @return
 	 */
 	public List<Subjects> findAll();
+	
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public int countActive();
 
 }

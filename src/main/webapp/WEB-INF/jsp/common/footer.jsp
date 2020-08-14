@@ -47,7 +47,7 @@
                                 <h3>get in touch</h3>
                                 <p>Your address goes here, Street<br>City, Roadno 785 New York</p>
                                 <p>+880  548  986  898  87<br>+880  659  785  658  98</p>
-                                <p>info@eduhome.com<br>www.eduhome.com</p>
+                                <p>info@asoms.com<br>www.asoms.com</p>
                             </div>
                         </div>
                     </div>

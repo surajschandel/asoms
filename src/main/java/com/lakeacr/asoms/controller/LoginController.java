@@ -26,26 +26,20 @@ public class LoginController {
 		return "login";
 	}
 	
-	@CrossOrigin
-    @RequestMapping(value = "/login", method = RequestMethod.POST, produces = "text/html")
-    public String login(@RequestBody User user, HttpSession httpSession) {
-		LOG.info(" login for user {}", user.getUserName());
-		String success="";
-        try {
-        	User userExists = userService.userExists(user.getUserName(), user.getPassword());
-            if (userExists!=null) {
-            	success="Successfully login";
-            }else {
-
-            	success="Failed to login";
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            LOG.error("Some error login for user {}", user.getUserName());
-
-        	success="Some server error in login";
-        }
-        System.out.println("Msg: "+success);
-        return success;
-    }
+	/*
+	 * @CrossOrigin
+	 * 
+	 * @RequestMapping(value = "/login", method = RequestMethod.POST, produces =
+	 * "text/html") public String login(@RequestBody User user, HttpSession
+	 * httpSession) { LOG.info(" login for user {}", user.getUserName()); String
+	 * success=""; try { User userExists =
+	 * userService.userExists(user.getUserName(), user.getPassword()); if
+	 * (userExists!=null) { success="Successfully login"; }else {
+	 * 
+	 * success="Failed to login"; } } catch (Exception e) { e.printStackTrace();
+	 * LOG.error("Some error login for user {}", user.getUserName());
+	 * 
+	 * success="Some server error in login"; } System.out.println("Msg: "+success);
+	 * return success; }
+	 */
 }

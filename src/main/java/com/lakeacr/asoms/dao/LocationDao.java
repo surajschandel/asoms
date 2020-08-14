@@ -41,5 +41,11 @@ public interface LocationDao {
 	 * @return
 	 */
 	public List<Locations> findAll();
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public int countActive();
 
 }
