@@ -2,38 +2,38 @@ package com.lakeacr.asoms.dao;
 
 import java.util.List;
 
-import com.lakeacr.asoms.domain.Locations;
+import com.lakeacr.asoms.domain.Medium;
 
 /**
  * 
  * @author SURAJ CHANDEL
  *
  */
-public interface LocationDao {
+public interface MediumDao {
 	/**
 	 * 
 	 * @param id
 	 * @return
 	 */
-	public Locations findById(long id);
+	public Medium findById(long id);
 	/**
 	 * 
-	 * @param location
+	 * @param medium
 	 * @return
 	 */
-	public Locations saveOrUpdate(Locations location);
+	public Medium saveOrUpdate(Medium o);
 	
 	/**
 	 * 
 	 * @return
 	 */
-	public List<Locations> saveAll(List<Locations> location);
+	public List<Medium> saveAll(List<Medium> o);
 	/**
 	 * 
 	 * @param code
 	 * @return
 	 */
-	public Locations findByLocationCode(String code);
+	public Medium findByLocationCode(String code);
 
 	/**
 	 * 
@@ -45,7 +45,7 @@ public interface LocationDao {
 	 * 
 	 * @return
 	 */
-	public List<Locations> findAll();
+	public List<Medium> findAll();
 	
 	/**
 	 * 

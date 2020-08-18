@@ -11,7 +11,6 @@ import org.springframework.stereotype.Repository;
 
 import com.lakeacr.asoms.domain.Locations;
 import com.lakeacr.asoms.repository.LocationRepository;
-import com.lakeacr.asoms.repository.SubjectRepository;
 
 /**
  * @author SURAJ CHANDEL
