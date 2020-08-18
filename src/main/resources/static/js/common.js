@@ -23,6 +23,12 @@ $(document).ready(function() {
 	$('#exportLocationsReportInExcel').click(function() {
 		window.open("/export-locations");
 	});
+	$('#exportMediumReportInExcel').click(function() {
+		window.open("/export-medium");
+	});
+	$('#exportCenterReportInExcel').click(function() {
+		window.open("/export-center");
+	});
 });
 function mypopup(url) {
 	width = window.screen.width;
@@ -96,6 +102,74 @@ $("#locationAjaxCallUpload").click(function(e) {
 	$.ajax({
 		type: "POST",
 		url: "/upload-location",
+		headers: { 'IsAjax': 'true' },
+		dataType: "json",
+		processData: false,
+		contentType: false,
+		data: formData,
+		success: function() {
+			window.location.reload();
+		},
+		error: function(error) {
+			window.location.reload();
+		}
+	});
+});
+function deleteMedium(id) {
+	$.ajax({
+		url: '/delete-medium/' + id,
+		method: 'DELETE',
+		success: function() {
+			alert("Record has been deleteds");
+			window.location.reload();
+		},
+		error: function(error) {
+			alert("Record has been deleteds");
+			window.location.reload();
+		}
+	})
+}
+
+$("#mediumAjaxCallUpload").click(function(e) {
+	var formData = new FormData($("#mediumUploadForm")[0]);
+	e.preventDefault();
+	$.ajax({
+		type: "POST",
+		url: "/upload-medium",
+		headers: { 'IsAjax': 'true' },
+		dataType: "json",
+		processData: false,
+		contentType: false,
+		data: formData,
+		success: function() {
+			window.location.reload();
+		},
+		error: function(error) {
+			window.location.reload();
+		}
+	});
+});
+function deleteCenter(id) {
+	$.ajax({
+		url: '/delete-center/' + id,
+		method: 'DELETE',
+		success: function() {
+			alert("Record has been deleteds");
+			window.location.reload();
+		},
+		error: function(error) {
+			alert("Record has been deleteds");
+			window.location.reload();
+		}
+	})
+}
+
+$("#centerAjaxCallUpload").click(function(e) {
+	var formData = new FormData($("#centerUploadForm")[0]);
+	e.preventDefault();
+	$.ajax({
+		type: "POST",
+		url: "/upload-center",
 		headers: { 'IsAjax': 'true' },
 		dataType: "json",
 		processData: false,

@@ -2,38 +2,38 @@ package com.lakeacr.asoms.dao;
 
 import java.util.List;
 
-import com.lakeacr.asoms.domain.Locations;
+import com.lakeacr.asoms.domain.Centers;
 
 /**
  * 
  * @author SURAJ CHANDEL
  *
  */
-public interface LocationDao {
+public interface CenterDao {
 	/**
 	 * 
 	 * @param id
 	 * @return
 	 */
-	public Locations findById(long id);
+	public Centers findById(long id);
 	/**
 	 * 
-	 * @param location
+	 * @param centers
 	 * @return
 	 */
-	public Locations saveOrUpdate(Locations location);
+	public Centers saveOrUpdate(Centers centers);
 	
 	/**
 	 * 
 	 * @return
 	 */
-	public List<Locations> saveAll(List<Locations> location);
+	public List<Centers> saveAll(List<Centers> location);
 	/**
 	 * 
 	 * @param code
 	 * @return
 	 */
-	public Locations findByLocationCode(String code);
+	public Centers findByCenterCode(String code);
 
 	/**
 	 * 
@@ -45,7 +45,7 @@ public interface LocationDao {
 	 * 
 	 * @return
 	 */
-	public List<Locations> findAll();
+	public List<Centers> findAll();
 	
 	/**
 	 * 

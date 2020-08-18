@@ -2,36 +2,15 @@
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <head>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
-<title>ASOMS - Answer Script On Screen Marking System</title>
+<title>Medium - Answer Script On Screen Marking System</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <%@include file="common/include.jsp"%>
-<script>
-	$(document).ready(function() {
-		// Activate tooltips
-		$('[data-toggle="tooltip"]').tooltip();
-
-		// Filter table rows based on searched term
-		$("#search").on("keyup", function() {
-			var term = $(this).val().toLowerCase();
-			$("table tbody tr").each(function() {
-				$row = $(this);
-				var name = $row.find("td:nth-child(2)").text().toLowerCase();
-				console.log(name);
-				if (name.search(term) < 0) {
-					$row.hide();
-				} else {
-					$row.show();
-				}
-			});
-		});
-	});
-</script>
 </head>
 <body>
 	<!-- Header Area Start -->
@@ -43,6 +22,8 @@
 				<div class="col-xs-12">
 					<div class="course-title">
 						<h3>Medium</h3>
+						<h2 class="title" style="color: green;">${success}</h2>
+						<h2 class="title" style="color: red;">${error}</h2>
 					</div>
 				</div>
 			</div>
@@ -52,14 +33,13 @@
 						<div class="table-title">
 							<div class="row">
 								<div class="col-sm-6 action-icon">
-									<a href="#" class="add" title="Add"
-										data-toggle="Add Scanning Location"><i
-										class="material-icons">add</i></a> <a href="#" class="import"
-										title="Import" data-toggle="Import Scanning Location"><i
-										class="material-icons">file_download</i></a> <a href="#"
-										class="export" title="Export"
-										data-toggle="Export Scanning Location"><i
-										class="material-icons">file_upload</i></a>
+									<a href="#" onclick='mypopup("/add-medium");return false;'
+										class="add" title="Add" data-toggle="Add Medium"><i
+										class="material-icons">add</i></a> <a href="#"
+										id="exportMediumReportInExcel" class="import" title="Import"
+										data-toggle="Import Medium"> <i class="material-icons">file_download</i></a>
+									<a href="#" onclick="openForm()" class="export" title="Export"
+										data-toggle="Export Medium"> <i class="material-icons">file_upload</i></a>
 								</div>
 								<div class="col-sm-6">
 									<div class="search-box">
@@ -83,33 +63,37 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>1</td>
-									<td>Hindi</td>
-									<td>89</td>
-									<td><a href="#" class="edit" title="Edit"
-										data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-										<a href="#" class="delete" title="Delete"
-										data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-									</td>
-								</tr>
-								<tr>
-									<td>2</td>
-									<td>English</td>
-									<td>57</td>
-									<td><a href="#" class="edit" title="Edit"
-										data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-										<a href="#" class="delete" title="Delete"
-										data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-									</td>
-								</tr>
-								
+								<c:forEach items="${mediums}" var="sub" varStatus="loop">
+									<tr>
+										<td>${loop.index+1}</td>
+										<td>${sub.mediumName}</td>
+										<td>${sub.mediumCode}</td>
+										<td><a href="#"
+											onclick='mypopup("/edit-medium/${sub.id}");return false;'
+											class="edit" title="Edit" data-toggle="tooltip"><i
+												class="material-icons">&#xE254;</i></a> <a href="#"
+											onclick="javascript:deleteMedium(${sub.id});return false;"
+											class="delete" title="Delete" data-toggle="tooltip"><i
+												class="material-icons">&#xE872;</i></a></td>
+									</tr>
+								</c:forEach>
+
 							</tbody>
 						</table>
 					</div>
 				</div>
 			</div>
 		</div>
+	</div>
+	<div class="form-popup" id="uploadForm">
+		<form action="#" class="form-container" enctype="multipart/form-data"
+			method="post" id="mediumUploadForm">
+			<h1>Upload File</h1>
+			<input type="file" name="file" id="file" placeholder="Select file"
+				required="required"> <input type="submit" class="btn"
+				id="mediumAjaxCallUpload" value="Upload" />
+			<button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+		</form>
 	</div>
 	<!-- Footer Start -->
 
@@ -127,6 +111,8 @@
 	<script src="js/plugins.js"></script>
 	<script src="js/main.js"></script>
 	<script src="js/counter.js"></script>
+
+	<script src="js/common.js"></script>
 </body>
 
 </html>
