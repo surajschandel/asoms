@@ -23,8 +23,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.lakeacr.asoms.dao.CenterDao;
+import com.lakeacr.asoms.dao.LocationDao;
 import com.lakeacr.asoms.domain.Centers;
-import com.lakeacr.asoms.domain.Subjects;
+import com.lakeacr.asoms.domain.Locations;
 import com.lakeacr.asoms.domain.User;
 import com.lakeacr.asoms.dto.ExportPdfDataDTO;
 import com.lakeacr.asoms.utils.ExportExcelDataHadlerUtil;
@@ -40,6 +41,9 @@ public class CenterServiceImpl implements CenterService {
 	private static final Logger LOG = LoggerFactory.getLogger(CenterServiceImpl.class);
 	@Autowired
 	CenterDao centerDao;
+	
+	@Autowired
+	LocationDao locationDao;
 
 	@Override
 	public List<Centers> getCenters() {
@@ -92,7 +96,7 @@ public class CenterServiceImpl implements CenterService {
 		return msg;
 	}
 
-	private static List<Centers> readCenterFromCSV(String fileName, Long userId) {
+	private List<Centers> readCenterFromCSV(String fileName, Long userId) {
 		List<Centers> list = new ArrayList<>();
 		Path pathToFile = Paths.get("D:/upload/" + fileName);
 		// create an instance of BufferedReader // using try with resource, Java 7
@@ -113,16 +117,17 @@ public class CenterServiceImpl implements CenterService {
 		return list;
 	}
 
-	private static Centers createObjects(String[] metadata, Long userId) {
+	private Centers createObjects(String[] metadata, Long userId) {
 		String center = metadata[1];
 		String code = metadata[2];
-		String locationCode = metadata[3];
+		String id = metadata[3];
 		String contactPerson = metadata[4];
 		String address = metadata[5];
 		String pinCode = metadata[6];
 		String mobileNo = metadata[7];
 		String emailId = metadata[8];
-		return new Centers(center, code, locationCode, contactPerson, address, pinCode, mobileNo, emailId, new Date(),
+		Locations locations=locationDao.findById(Long.parseLong(id));
+		return new Centers(center, code, locations, contactPerson, address, pinCode, mobileNo, emailId, new Date(),
 				userId, true, false);
 	}
 
@@ -138,7 +143,7 @@ public class CenterServiceImpl implements CenterService {
 		dataDTO.setHeading("Scanning Center List");
 		dataDTO.getTableHeading().add("Center Name");
 		dataDTO.getTableHeading().add("Center Code");
-		dataDTO.getTableHeading().add("Location Code");
+		dataDTO.getTableHeading().add("Location Name");
 		dataDTO.getTableHeading().add("Contact Person");
 		dataDTO.getTableHeading().add("Address");
 		dataDTO.getTableHeading().add("Pin Code");
@@ -149,7 +154,7 @@ public class CenterServiceImpl implements CenterService {
 			ArrayList<Object> arrayList = new ArrayList<Object>();
 			arrayList.add(obj.getCenterName());
 			arrayList.add(obj.getCenterCode());
-			arrayList.add(obj.getLocationCode());
+			arrayList.add(obj.getLocations().getLocationName());
 			arrayList.add(obj.getContactPerson());
 			arrayList.add(obj.getAddress());
 			arrayList.add(obj.getPinCode());

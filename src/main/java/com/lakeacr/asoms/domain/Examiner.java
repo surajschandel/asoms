@@ -16,26 +16,24 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name = "centers")
-public class Centers {
+@Table(name = "examiner")
+public class Examiner {
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(name = "center_name")
-	private String centerName;
-	@Column(name = "center_code")
-	private String centerCode;
-	@Column(name = "address")
-	private String address;
-	@Column(name = "pin_code")
-	private String pinCode;
+	@Column(name = "name")
+	private String name;
+	@Column(name = "designation")
+	private String designation;
 	@Column(name = "phone_no")
 	private String phoneNo;
-	@Column(name = "contact_person")
-	private String contactPerson;
 	@Column(name = "email_id")
 	private String emailId;
+	@Column(name = "school_name")
+	private String schoolName;
+	@Column(name = "user_name")
+	private String userName;
 	@Column(name = "updated_at")
 	private Date updatedAt;
 	@Column(name = "updated_by")
@@ -50,54 +48,56 @@ public class Centers {
 	private Long deletedBy;
 	private boolean isActive;
 	private boolean isDeleted;
-	
 
 	@ManyToOne
-	private Locations locations;
+	private HeadExaminer headExaminer;
+
+	@ManyToOne
+	private Centers centers;
+
+	@ManyToOne
+	private Subjects subjects;
 
 	/**
 	 * 
 	 */
-	public Centers() {
-		super();
+	public Examiner() {
 	}
 
 	/**
-	 * @param centerName
-	 * @param centerCode
-	 * @param locationCode
-	 * @param address
-	 * @param pinCode
+	 * @param name
+	 * @param designation
 	 * @param phoneNo
 	 * @param emailId
+	 * @param schoolName
+	 * @param userName
 	 * @param createdAt
 	 * @param createdBy
 	 * @param isActive
 	 * @param isDeleted
+	 * @param locations
+	 * @param centers
 	 */
-	public Centers(String centerName, String centerCode, Locations locations, String contactPerson, String address,
-			String pinCode, String phoneNo, String emailId, Date createdAt, Long createdBy, boolean isActive,
-			boolean isDeleted) {
+	public Examiner(String name, String designation, String phoneNo, String emailId, String schoolName, String userName,
+			Date createdAt, Long createdBy, boolean isActive, boolean isDeleted, HeadExaminer headExaminer,
+			Centers centers, Subjects subjects) {
 		super();
-		this.centerName = centerName;
-		this.centerCode = centerCode;
-		this.locations = locations;
-		this.address = address;
-		this.contactPerson = contactPerson;
-		this.pinCode = pinCode;
+		this.name = name;
+		this.designation = designation;
 		this.phoneNo = phoneNo;
 		this.emailId = emailId;
+		this.schoolName = schoolName;
+		this.userName = userName;
 		this.createdAt = createdAt;
 		this.createdBy = createdBy;
 		this.isActive = isActive;
 		this.isDeleted = isDeleted;
+		this.headExaminer = headExaminer;
+		this.centers = centers;
+		this.subjects = subjects;
 	}
-	
-	
 
-	
 
-	
 	/**
 	 * @return the id
 	 */
@@ -113,88 +113,31 @@ public class Centers {
 	}
 
 	/**
-	 * @return the centerName
+	 * @return the name
 	 */
-	public String getCenterName() {
-		return centerName;
+	public String getName() {
+		return name;
 	}
 
 	/**
-	 * @param centerName the centerName to set
+	 * @param name the name to set
 	 */
-	public void setCenterName(String centerName) {
-		this.centerName = centerName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	/**
-	 * @return the centerCode
+	 * @return the designation
 	 */
-	public String getCenterCode() {
-		return centerCode;
+	public String getDesignation() {
+		return designation;
 	}
 
 	/**
-	 * @param centerCode the centerCode to set
+	 * @param designation the designation to set
 	 */
-	public void setCenterCode(String centerCode) {
-		this.centerCode = centerCode;
-	}
-
-	
-	/**
-	 * @return the locations
-	 */
-	public Locations getLocations() {
-		return locations;
-	}
-
-	/**
-	 * @param locations the locations to set
-	 */
-	public void setLocations(Locations locations) {
-		this.locations = locations;
-	}
-
-	/**
-	 * @return the contactPerson
-	 */
-	public String getContactPerson() {
-		return contactPerson;
-	}
-
-	/**
-	 * @param contactPerson the contactPerson to set
-	 */
-	public void setContactPerson(String contactPerson) {
-		this.contactPerson = contactPerson;
-	}
-
-	/**
-	 * @return the address
-	 */
-	public String getAddress() {
-		return address;
-	}
-
-	/**
-	 * @param address the address to set
-	 */
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	/**
-	 * @return the pinCode
-	 */
-	public String getPinCode() {
-		return pinCode;
-	}
-
-	/**
-	 * @param pinCode the pinCode to set
-	 */
-	public void setPinCode(String pinCode) {
-		this.pinCode = pinCode;
+	public void setDesignation(String designation) {
+		this.designation = designation;
 	}
 
 	/**
@@ -223,6 +166,34 @@ public class Centers {
 	 */
 	public void setEmailId(String emailId) {
 		this.emailId = emailId;
+	}
+
+	/**
+	 * @return the schoolName
+	 */
+	public String getSchoolName() {
+		return schoolName;
+	}
+
+	/**
+	 * @param schoolName the schoolName to set
+	 */
+	public void setSchoolName(String schoolName) {
+		this.schoolName = schoolName;
+	}
+
+	/**
+	 * @return the userName
+	 */
+	public String getUserName() {
+		return userName;
+	}
+
+	/**
+	 * @param userName the userName to set
+	 */
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	/**
@@ -337,13 +308,56 @@ public class Centers {
 		this.isDeleted = isDeleted;
 	}
 
+	/**
+	 * @return the headExaminer
+	 */
+	public HeadExaminer getHeadExaminer() {
+		return headExaminer;
+	}
+
+	/**
+	 * @param headExaminer the headExaminer to set
+	 */
+	public void setHeadExaminer(HeadExaminer headExaminer) {
+		this.headExaminer = headExaminer;
+	}
+
+	/**
+	 * @return the centers
+	 */
+	public Centers getCenters() {
+		return centers;
+	}
+
+	/**
+	 * @param centers the centers to set
+	 */
+	public void setCenters(Centers centers) {
+		this.centers = centers;
+	}
+
+	/**
+	 * @return the subjects
+	 */
+	public Subjects getSubjects() {
+		return subjects;
+	}
+
+	/**
+	 * @param subjects the subjects to set
+	 */
+	public void setSubjects(Subjects subjects) {
+		this.subjects = subjects;
+	}
+
 	@Override
 	public String toString() {
-		return "Centers [id=" + id + ", centerName=" + centerName + ", centerCode=" + centerCode + ", locations="
-				+ locations + ", address=" + address + ", pinCode=" + pinCode + ", phoneNo=" + phoneNo
-				+ ", contactPerson=" + contactPerson + ", emailId=" + emailId + ", updatedAt=" + updatedAt
-				+ ", updatedBy=" + updatedBy + ", createdAt=" + createdAt + ", createdBy=" + createdBy + ", deletedAt="
-				+ deletedAt + ", deletedBy=" + deletedBy + ", isActive=" + isActive + ", isDeleted=" + isDeleted + "]";
+		return "Examiner [id=" + id + ", name=" + name + ", designation=" + designation + ", phoneNo=" + phoneNo
+				+ ", emailId=" + emailId + ", schoolName=" + schoolName + ", userName=" + userName + ", updatedAt="
+				+ updatedAt + ", updatedBy=" + updatedBy + ", createdAt=" + createdAt + ", createdBy=" + createdBy
+				+ ", deletedAt=" + deletedAt + ", deletedBy=" + deletedBy + ", isActive=" + isActive + ", isDeleted="
+				+ isDeleted + ", headExaminer=" + headExaminer + ", centers=" + centers + ", subjects=" + subjects
+				+ "]";
 	}
 
 }

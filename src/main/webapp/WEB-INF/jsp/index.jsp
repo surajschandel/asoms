@@ -39,7 +39,7 @@
 					<div class="col">
 						<div class="counter">
 							<i class="fa fa-code fa-2x"></i>
-							<h2 class="timer count-title count-number" data-to="100"
+							<h2 class="timer count-title count-number" data-to="${counts.centers}"
 								data-speed="1500"></h2>
 							<p class="count-text ">Evaluation Center Count</p>
 						</div>

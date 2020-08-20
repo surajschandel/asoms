@@ -24,7 +24,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.lakeacr.asoms.dao.LocationDao;
 import com.lakeacr.asoms.domain.Locations;
-import com.lakeacr.asoms.domain.Subjects;
 import com.lakeacr.asoms.domain.User;
 import com.lakeacr.asoms.dto.ExportPdfDataDTO;
 import com.lakeacr.asoms.utils.ExportExcelDataHadlerUtil;

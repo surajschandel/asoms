@@ -18,100 +18,96 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.lakeacr.asoms.dao.CenterDao;
 import com.lakeacr.asoms.dao.LocationDao;
-import com.lakeacr.asoms.domain.HeadExaminer;
+import com.lakeacr.asoms.domain.Paper;
 import com.lakeacr.asoms.domain.MyUserDetails;
 import com.lakeacr.asoms.domain.User;
-import com.lakeacr.asoms.service.HeadExaminerService;
+import com.lakeacr.asoms.service.CenterService;
+import com.lakeacr.asoms.service.PaperService;
 
 @Controller
-public class HeadExaminerController {
+public class PaperController {
 
-	private static final Logger LOG = LoggerFactory.getLogger(HeadExaminerController.class);
-	@Autowired
-	HeadExaminerService headExaminerService;
 	
+	private static final Logger LOG = LoggerFactory.getLogger(PaperController.class);
+
+	@Autowired
+	PaperService centerService;
+
 	@Autowired
 	LocationDao locationDao;
-
-	@Autowired
-	CenterDao centerDao;
-		
-	@RequestMapping("/head-examiner")
+	
+	@RequestMapping("/paper")
 	public String index(Model model) {
-		List<HeadExaminer> headExaminers = headExaminerService.getHeadExaminer();
-		model.addAttribute("headExaminers", headExaminers);
-		return "head-examiner";
+		List<Paper> papers = centerService.getPapers();
+		model.addAttribute("papers", papers);
+		return "paper";
 	}
 
-	@RequestMapping("/add-head-examiner")
+	@RequestMapping("/add-paper")
 	public String add(ModelMap model) {
-		model.addAttribute("command", new HeadExaminer());
+		model.addAttribute("command", new Paper());
 		model.addAttribute("locations", locationDao.findAll());
-		model.addAttribute("centers", centerDao.findAll());
-		return "add-head-examiner";
+		return "add-paper";
 	}
 
-	@RequestMapping("/edit-head-examiner/{id}")
+	@RequestMapping("/edit-paper/{id}")
 	public String edit(@PathVariable("id") Long id, ModelMap model) {
-		LOG.info("Edit Center: {}", id);
+		LOG.info("Edit Paper: {}", id);
 		try {
-			HeadExaminer headExaminers = headExaminerService.getHeadExaminer(id);
-			model.addAttribute("command", headExaminers);
+			Paper papers = centerService.getPaper(id);
+			model.addAttribute("command", papers);
 			model.addAttribute("locations", locationDao.findAll());
-			model.addAttribute("centers", centerDao.findAll());
 		} catch (Exception e) {
-			LOG.info("Failed to get head examiner some server error id: {}", id);
+			LOG.info("Failed to get paper some server error id: {}", id);
 		}
-		return "add-head-examiner";
+		return "add-paper";
 	}
 
-	@RequestMapping("/save-head-examiner")
-	public String save(@ModelAttribute("command") HeadExaminer center, ModelMap model,
+	@RequestMapping("/save-paper")
+	public String save(@ModelAttribute("command") Paper paper, ModelMap model,
 			@AuthenticationPrincipal MyUserDetails userDetails) {
-		LOG.info("Save Head Examiner: {}", center);
+		LOG.info("Save Paper: {}", paper);
 		try {
 			User user = userDetails.getUser();
-			model.addAttribute("success", headExaminerService.saveOrUpdate(center, user));
-			model.addAttribute("command", new HeadExaminer());
+			model.addAttribute("success", centerService.saveOrUpdate(paper, user));
+			model.addAttribute("command", new Paper());
 		} catch (Exception e) {
 			LOG.error("Some server error: ", e);
 			model.addAttribute("error", e.getMessage());
 		}
-		return "add-head-examiner";
+		return "add-paper";
 	}
 
-	@RequestMapping("/delete-head-examiner/{id}")
+	@RequestMapping("/delete-paper/{id}")
 	public String delete(@PathVariable("id") Long id, @AuthenticationPrincipal MyUserDetails userDetails) {
-		LOG.info("Delete Head Examiner: {}", id);
+		LOG.info("Delete Paper: {}", id);
 		try {
 			User user = userDetails.getUser();
-			headExaminerService.delete(id, user);
+			centerService.delete(id, user);
 		} catch (Exception e) {
-			LOG.info("Failed to delete head examiner some server error id: {}", id);
+			LOG.info("Failed to delete paper some server error id: {}", id);
 		}
-		return "head-examiner";
+		return "paper";
 	}
 
-	@RequestMapping("/upload-head-examiner")
+	@RequestMapping("/upload-paper")
 	public String upload(@RequestParam("file") MultipartFile file, ModelMap model,
 			@AuthenticationPrincipal MyUserDetails userDetails) {
-		LOG.info("upload head examiner: {}", file.getOriginalFilename());
+		LOG.info("upload Paper: {}", file.getOriginalFilename());
 		try {
 			User user = userDetails.getUser();
-			headExaminerService.uploadCsvFileData(file, user.getUserId());
+			centerService.uploadCsvFileData(file, user.getUserId());
 			model.addAttribute("success", "File uploaded successfully");
 		} catch (Exception e) {
 			LOG.error("Some server error: ", e);
 			model.addAttribute("error", "Some error ocurs");
 		}
-		return "head-examiner";
+		return "paper";
 	}
 
-	@RequestMapping("/export-head-examiner")
+	@RequestMapping("/export-paper")
 	public void export(HttpServletRequest request, HttpServletResponse response) {
-		headExaminerService.export(request, response);
+		centerService.export(request, response);
 	}
-
- }
+}
