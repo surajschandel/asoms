@@ -1,6 +1,6 @@
 language: java
 sudo: false
-script: mvn clean install
+script: mvn heroku:deploy
 
 
 deploy:
@@ -11,3 +11,4 @@ deploy:
   file: asoms/target/*.war
   on:
     branch: master
+    
