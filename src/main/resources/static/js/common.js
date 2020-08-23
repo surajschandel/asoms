@@ -35,6 +35,9 @@ $(document).ready(function() {
 	$('#exportExaminerReportInExcel').click(function() {
 		window.open("/export-examiner");
 	});
+	$('#exportPaperReportInExcel').click(function() {
+		window.open("/export-paper");
+	});
 });
 function refreshForm(){
 	window.location.reload();
@@ -247,6 +250,40 @@ $("#examinerAjaxCallUpload").click(function(e) {
 	$.ajax({
 		type: "POST",
 		url: "/upload-examiner",
+		headers: { 'IsAjax': 'true' },
+		dataType: "json",
+		processData: false,
+		contentType: false,
+		data: formData,
+		success: function() {
+			window.location.reload();
+		},
+		error: function(error) {
+			window.location.reload();
+		}
+	});
+});
+function deletePaper(id) {
+	$.ajax({
+		url: '/delete-paper/' + id,
+		method: 'DELETE',
+		success: function() {
+			alert("Record has been deleteds");
+			window.location.reload();
+		},
+		error: function(error) {
+			alert("Record has been deleteds");
+			window.location.reload();
+		}
+	})
+}
+
+$("#paperAjaxCallUpload").click(function(e) {
+	var formData = new FormData($("#paperUploadForm")[0]);
+	e.preventDefault();
+	$.ajax({
+		type: "POST",
+		url: "/upload-paper",
 		headers: { 'IsAjax': 'true' },
 		dataType: "json",
 		processData: false,

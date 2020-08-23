@@ -18,11 +18,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.lakeacr.asoms.dao.LocationDao;
-import com.lakeacr.asoms.domain.Paper;
+import com.lakeacr.asoms.dao.MediumDao;
+import com.lakeacr.asoms.dao.SubjectsDao;
 import com.lakeacr.asoms.domain.MyUserDetails;
+import com.lakeacr.asoms.domain.Paper;
 import com.lakeacr.asoms.domain.User;
-import com.lakeacr.asoms.service.CenterService;
 import com.lakeacr.asoms.service.PaperService;
 
 @Controller
@@ -35,9 +35,11 @@ public class PaperController {
 	PaperService centerService;
 
 	@Autowired
-	LocationDao locationDao;
+	SubjectsDao subjectsDao;
+	@Autowired
+	MediumDao mediumDao;
 	
-	@RequestMapping("/paper")
+	@RequestMapping("/papers")
 	public String index(Model model) {
 		List<Paper> papers = centerService.getPapers();
 		model.addAttribute("papers", papers);
@@ -47,7 +49,8 @@ public class PaperController {
 	@RequestMapping("/add-paper")
 	public String add(ModelMap model) {
 		model.addAttribute("command", new Paper());
-		model.addAttribute("locations", locationDao.findAll());
+		model.addAttribute("subjects", subjectsDao.findAll());
+		model.addAttribute("mediums", mediumDao.findAll());
 		return "add-paper";
 	}
 
@@ -57,7 +60,8 @@ public class PaperController {
 		try {
 			Paper papers = centerService.getPaper(id);
 			model.addAttribute("command", papers);
-			model.addAttribute("locations", locationDao.findAll());
+			model.addAttribute("subjects", subjectsDao.findAll());
+			model.addAttribute("mediums", mediumDao.findAll());
 		} catch (Exception e) {
 			LOG.info("Failed to get paper some server error id: {}", id);
 		}

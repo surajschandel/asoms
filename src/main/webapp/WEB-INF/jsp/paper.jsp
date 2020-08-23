@@ -38,7 +38,7 @@
 										class="material-icons">add</i></a> <a href="#"
 										id="exportPaperReportInExcel" class="import" title="Import"
 										data-toggle="Import Paper"> <i class="material-icons">file_download</i></a>
-									<a href="#" onclick="openForm()" class="export" title="Export"
+									   <a href="#" onclick="openForm()" class="export" title="Export"
 										data-toggle="Export Paper"> <i class="material-icons">file_upload</i></a>
 										<a href="#" onclick="refreshForm()" class="refresh" title="Refresh"
 										data-toggle="Refresh Page"> <i class="material-icons">refresh</i></a>
@@ -80,14 +80,18 @@
 									<tr>
 										<td>${loop.index+1}</td>
 										<td>${sub.name}</td>
-										<td>${sub.designation}</td>
-										<td>${sub.emailId}</td>
-										<td>${sub.phoneNo}</td>
-										<td>${sub.schoolName}</td>
-										<td>${sub.headPaper.name}</td>
-										<td>${sub.userName}</td>
-										<td>${sub.centers.centerCode}</td>
+										<td>${sub.paperCode}</td>
+										<td>${sub.regionCode}</td>
 										<td>${sub.subjects.subjectCode}</td>
+										<td>${sub.medium.mediumName}</td>
+										<td>${sub.mainAnsScriptPage}</td>
+										<td>${sub.supplAnsScriptPage}</td>
+										<td>${sub.modelQuestionPaper}</td>
+										<td>${sub.modelAnswer}</td>
+										<td>${sub.totalMarks}</td>
+										<td>${sub.optionalQuestionMarks}</td>
+										<td>${sub.passingMarks}</td>
+										<td>${sub.markingScheme}</td>
 										<td><a href="#"
 											onclick='mypopup("/edit-paper/${sub.id}");return false;'
 											class="edit" title="Edit" data-toggle="tooltip"><i

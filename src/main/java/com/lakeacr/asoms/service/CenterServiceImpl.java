@@ -84,10 +84,8 @@ public class CenterServiceImpl implements CenterService {
 		try {
 			List<Centers> centers = new ArrayList<>();
 			for (Centers center : readCenterFromCSV(file.getOriginalFilename(), userId)) {
-				if(!center.getCenterName().equalsIgnoreCase("Center Name")) {
 					centers.add(center);
 				}
-			}
 			centerDao.saveAll(centers);
 		} catch (Exception e) {
 			LOG.error("Some server error in upload file : ", e);
@@ -104,6 +102,7 @@ public class CenterServiceImpl implements CenterService {
 		System.out.println("File=" + pathToFile.getFileName());
 		try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.US_ASCII)) {
 			String line = br.readLine();
+			line = br.readLine();
 			while (line != null) {
 				String[] attributes = line.split(",");
 					Centers center = createObjects(attributes, userId);

@@ -95,6 +95,7 @@ public class LocationServiceImpl implements LocationService {
 		System.out.println("File=" + pathToFile.getFileName());
 		try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.US_ASCII)) {
 			String line = br.readLine();
+			line = br.readLine();
 			while (line != null) {
 				String[] attributes = line.split(",");
 				Locations location = createObjects(attributes, userId);

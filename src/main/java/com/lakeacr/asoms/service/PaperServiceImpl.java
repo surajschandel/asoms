@@ -123,16 +123,16 @@ public class PaperServiceImpl implements PaperService {
 		String name = metadata[1];
 		String paperCode = metadata[2];
 		String regionCode = metadata[3];
-		String subjectId = metadata[3];
-		String mediumId = metadata[3];
-		String mainAnsScriptPage = metadata[4];
-		String supliAnsScriptPage = metadata[5];
-		String modelQuesPaper = metadata[6];
-		String modelAnswer = metadata[7];
-		double totalMark = Double.parseDouble(metadata[8]);
-		double optionalQueMark = Double.parseDouble(metadata[8]);
-		double passingMark = Double.parseDouble(metadata[8]);
-		String markingScheme = metadata[8];
+		String subjectId = metadata[4];
+		String mediumId = metadata[5];
+		String mainAnsScriptPage = metadata[6];
+		String supliAnsScriptPage = metadata[7];
+		String modelQuesPaper = metadata[8];
+		String modelAnswer = metadata[9];
+		double totalMark = Double.parseDouble(metadata[10]);
+		double optionalQueMark = Double.parseDouble(metadata[11]);
+		double passingMark = Double.parseDouble(metadata[12]);
+		String markingScheme = metadata[13];
 		Subjects subjects=subjectsDao.findById(Long.parseLong(subjectId));
 		Medium medium=mediumDao.findById(Long.parseLong(mediumId));
 		return new Paper(name, paperCode, regionCode, mainAnsScriptPage, supliAnsScriptPage, modelQuesPaper, modelAnswer, totalMark, optionalQueMark,passingMark, markingScheme, new Date(),
