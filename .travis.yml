@@ -1,0 +1,13 @@
+language: java
+sudo: false
+script: mvn clean install
+
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $asoms  # Set in the settings page of your repository, as a secure variable
+  keep_history: true
+  file: asoms/target/*.war
+  on:
+    branch: master
