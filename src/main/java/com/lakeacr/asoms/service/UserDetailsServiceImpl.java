@@ -10,8 +10,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.management.relation.Role;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.lakeacr.asoms.domain.MyUserDetails;

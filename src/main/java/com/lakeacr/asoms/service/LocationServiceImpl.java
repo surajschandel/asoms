@@ -24,7 +24,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.lakeacr.asoms.dao.LocationDao;
 import com.lakeacr.asoms.domain.Locations;
-import com.lakeacr.asoms.domain.Subjects;
 import com.lakeacr.asoms.domain.User;
 import com.lakeacr.asoms.dto.ExportPdfDataDTO;
 import com.lakeacr.asoms.utils.ExportExcelDataHadlerUtil;
@@ -96,6 +95,7 @@ public class LocationServiceImpl implements LocationService {
 		System.out.println("File=" + pathToFile.getFileName());
 		try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.US_ASCII)) {
 			String line = br.readLine();
+			line = br.readLine();
 			while (line != null) {
 				String[] attributes = line.split(",");
 				Locations location = createObjects(attributes, userId);

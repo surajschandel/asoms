@@ -40,6 +40,8 @@
 										data-toggle="Import Subjects"> <i class="material-icons">file_download</i></a>
 									<a href="#" onclick="openForm()" class="export" title="Export"
 										data-toggle="Export Subjects"> <i class="material-icons">file_upload</i></a>
+										<a href="#" onclick="refreshForm()" class="refresh" title="Refresh"
+										data-toggle="Refresh Page"> <i class="material-icons">refresh</i></a>
 								</div>
 								<div class="col-sm-6">
 									<div class="search-box">

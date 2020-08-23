@@ -2,15 +2,17 @@
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <head>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
-<title>Evaluation Center - Answer Script On Screen Marking System</title>
+<title>Examiner - Answer Script On Screen Marking System</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <%@include file="common/include.jsp"%>
+
 </head>
 <body>
 	<!-- Header Area Start -->
@@ -21,9 +23,7 @@
 			<div class="row">
 				<div class="col-xs-12">
 					<div class="course-title">
-						<h3>Evaluation Center</h3>
-						<h2 class="title" style="color: green;">${success}</h2>
-						<h2 class="title" style="color: red;">${error}</h2>
+						<h3>Examiner</h3>
 					</div>
 				</div>
 			</div>
@@ -33,13 +33,13 @@
 						<div class="table-title">
 							<div class="row">
 								<div class="col-sm-6 action-icon">
-									<a href="#" onclick='mypopup("/add-center");return false;'
-										class="add" title="Add" data-toggle="Add Medium"><i
+									<a href="#" onclick='mypopup("/add-examiner");return false;'
+										class="add" title="Add" data-toggle="Add Head Examiner"><i
 										class="material-icons">add</i></a> <a href="#"
-										id="exportCenterReportInExcel" class="import" title="Import"
-										data-toggle="Import Evaluation Center"> <i class="material-icons">file_download</i></a>
+										id="exportExaminerReportInExcel" class="import" title="Import"
+										data-toggle="Import Head Examiner"> <i class="material-icons">file_download</i></a>
 									<a href="#" onclick="openForm()" class="export" title="Export"
-										data-toggle="Export Evaluation Center"> <i class="material-icons">file_upload</i></a>
+										data-toggle="Export Head Examiner"> <i class="material-icons">file_upload</i></a>
 										<a href="#" onclick="refreshForm()" class="refresh" title="Refresh"
 										data-toggle="Refresh Page"> <i class="material-icons">refresh</i></a>
 								</div>
@@ -58,35 +58,37 @@
 						<table class="table table-striped">
 							<thead>
 								<tr>
-									<th style="width: 10%;">#</th>
-									<th>Center Name</th>
+									<th style="width: 2%;">#</th>
+									<th>Name</th>
+									<th>Designation</th>
+									<th>Email Id</th>
+									<th>Phone No.</th>
+									<th>School Name</th>
+									<th>Head Examiner Name</th>
+									<th>User Name</th>
 									<th>Center Code</th>
-									<th>Location Name</th>
-									<th>Contact Person</th>
-									<th>Address</th>
-									<th>Pin Code</th>
-									<th>Mobile No</th>
-									<th>Email</th>
-									<th style="width: 10%;">Actions</th>
+									<th>Subject Code</th>
+									<th style="width: 8%;">Actions</th>
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${centers}" var="sub" varStatus="loop">
+								<c:forEach items="${examiners}" var="sub" varStatus="loop">
 									<tr>
 										<td>${loop.index+1}</td>
-										<td>${sub.centerName}</td>
-										<td>${sub.centerCode}</td>
-										<td>${sub.locations.locationName}</td>
-										<td>${sub.contactPerson}</td>
-										<td>${sub.address}</td>
-										<td>${sub.pinCode}</td>
-										<td>${sub.phoneNo}</td>
+										<td>${sub.name}</td>
+										<td>${sub.designation}</td>
 										<td>${sub.emailId}</td>
+										<td>${sub.phoneNo}</td>
+										<td>${sub.schoolName}</td>
+										<td>${sub.headExaminer.name}</td>
+										<td>${sub.userName}</td>
+										<td>${sub.centers.centerCode}</td>
+										<td>${sub.subjects.subjectCode}</td>
 										<td><a href="#"
-											onclick='mypopup("/edit-center/${sub.id}");return false;'
+											onclick='mypopup("/edit-examiner/${sub.id}");return false;'
 											class="edit" title="Edit" data-toggle="tooltip"><i
 												class="material-icons">&#xE254;</i></a> <a href="#"
-											onclick="javascript:deleteCenter(${sub.id});return false;"
+											onclick="javascript:deleteExaminer(${sub.id});return false;"
 											class="delete" title="Delete" data-toggle="tooltip"><i
 												class="material-icons">&#xE872;</i></a></td>
 									</tr>
@@ -101,11 +103,11 @@
 	</div>
 	<div class="form-popup" id="uploadForm">
 		<form action="#" class="form-container" enctype="multipart/form-data"
-			method="post" id="centerUploadForm">
+			method="post" id="examinerUploadForm">
 			<h1>Upload File</h1>
 			<input type="file" name="file" id="file" placeholder="Select file"
 				required="required"> <input type="submit" class="btn"
-				id="centerAjaxCallUpload" value="Upload" />
+				id="examinerAjaxCallUpload" value="Upload" />
 			<button type="button" class="btn cancel" onclick="closeForm()">Close</button>
 		</form>
 	</div>

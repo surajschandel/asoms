@@ -3,35 +3,16 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <head>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
-<title>ASOMS - Answer Script On Screen Marking System</title>
+<title>Head Examiner - Answer Script On Screen Marking System</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <%@include file="common/include.jsp"%>
-<script>
-	$(document).ready(function() {
-		// Activate tooltips
-		$('[data-toggle="tooltip"]').tooltip();
 
-		// Filter table rows based on searched term
-		$("#search").on("keyup", function() {
-			var term = $(this).val().toLowerCase();
-			$("table tbody tr").each(function() {
-				$row = $(this);
-				var name = $row.find("td:nth-child(2)").text().toLowerCase();
-				console.log(name);
-				if (name.search(term) < 0) {
-					$row.hide();
-				} else {
-					$row.show();
-				}
-			});
-		});
-	});
-</script>
 </head>
 <body>
 	<!-- Header Area Start -->
@@ -42,7 +23,7 @@
 			<div class="row">
 				<div class="col-xs-12">
 					<div class="course-title">
-						<h3>Scanning Location</h3>
+						<h3>Head Examiner</h3>
 					</div>
 				</div>
 			</div>
@@ -52,14 +33,15 @@
 						<div class="table-title">
 							<div class="row">
 								<div class="col-sm-6 action-icon">
-									<a href="#" class="add" title="Add"
-										data-toggle="Add Scanning Location"><i
-										class="material-icons">add</i></a> <a href="#" class="import"
-										title="Import" data-toggle="Import Scanning Location"><i
-										class="material-icons">file_download</i></a> <a href="#"
-										class="export" title="Export"
-										data-toggle="Export Scanning Location"><i
-										class="material-icons">file_upload</i></a>
+									<a href="#" onclick='mypopup("/add-head-examiner");return false;'
+										class="add" title="Add" data-toggle="Add Head Examiner"><i
+										class="material-icons">add</i></a> <a href="#"
+										id="exportHeadExaminerReportInExcel" class="import" title="Import"
+										data-toggle="Import Head Examiner"> <i class="material-icons">file_download</i></a>
+									<a href="#" onclick="openForm()" class="export" title="Export"
+										data-toggle="Export Head Examiner"> <i class="material-icons">file_upload</i></a>
+										<a href="#" onclick="refreshForm()" class="refresh" title="Refresh"
+										data-toggle="Refresh Page"> <i class="material-icons">refresh</i></a>
 								</div>
 								<div class="col-sm-6">
 									<div class="search-box">
@@ -82,93 +64,50 @@
 									<th>Email Id</th>
 									<th>Phone No.</th>
 									<th>School Name</th>
+									<th>Location Name</th>
 									<th>User Name</th>
 									<th>Center Code</th>
 									<th style="width: 8%;">Actions</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>1</td>
-									<td>Thomas Hardy</td>
-									<td>89 Chiaroscuro Rd.</td>
-									<td>Thomas Hardy</td>
-									<td>89 Chiaroscuro Rd.</td>
-									<td>Thomas Hardy</td>
-									<td>89 Chiaroscuro Rd.</td>
-									<td>Thomas Hardy</td>
-									<td><a href="#" class="edit" title="Edit"
-										data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-										<a href="#" class="delete" title="Delete"
-										data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-									</td>
-								</tr>
-								<tr>
-									<td>2</td>
-									<td>Maria Anders</td>
-									<td>Obere Str. 57</td>
-									<td>Maria Anders</td>
-									<td>Obere Str. 57</td>
-									<td>Maria Anders</td>
-									<td>Obere Str. 57</td>
-									<td>Maria Anders</td>
-									<td><a href="#" class="edit" title="Edit"
-										data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-										<a href="#" class="delete" title="Delete"
-										data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-									</td>
-								</tr>
-								<tr>
-									<td>3</td>
-									<td>Fran Wilson</td>
-									<td>C/ Araquil, 67</td>
-									<td>Maria Anders</td>
-									<td>Obere Str. 57</td>
-									<td>Maria Anders</td>
-									<td>Obere Str. 57</td>
-									<td>Maria Anders</td>
-									<td><a href="#" class="edit" title="Edit"
-										data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-										<a href="#" class="delete" title="Delete"
-										data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-									</td>
-								</tr>
-								<tr>
-									<td>4</td>
-									<td>Dominique Perrier</td>
-									<td>25, rue Lauriston</td>
-									<td>Maria Anders</td>
-									<td>Obere Str. 57</td>
-									<td>Maria Anders</td>
-									<td>Obere Str. 57</td>
-									<td>Maria Anders</td>
-									<td><a href="#" class="edit" title="Edit"
-										data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-										<a href="#" class="delete" title="Delete"
-										data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-									</td>
-								</tr>
-								<tr>
-									<td>5</td>
-									<td>Martin Blank</td>
-									<td>Via Monte Bianco 34</td>
-									<td>Maria Anders</td>
-									<td>Obere Str. 57</td>
-									<td>Maria Anders</td>
-									<td>Obere Str. 57</td>
-									<td>Maria Anders</td>
-									<td><a href="#" class="edit" title="Edit"
-										data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-										<a href="#" class="delete" title="Delete"
-										data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-									</td>
-								</tr>
+								<c:forEach items="${headExaminers}" var="sub" varStatus="loop">
+									<tr>
+										<td>${loop.index+1}</td>
+										<td>${sub.name}</td>
+										<td>${sub.designation}</td>
+										<td>${sub.emailId}</td>
+										<td>${sub.phoneNo}</td>
+										<td>${sub.schoolName}</td>
+										<td>${sub.locations.locationName}</td>
+										<td>${sub.userName}</td>
+										<td>${sub.centers.centerCode}</td>
+										<td><a href="#"
+											onclick='mypopup("/edit-head-examiner/${sub.id}");return false;'
+											class="edit" title="Edit" data-toggle="tooltip"><i
+												class="material-icons">&#xE254;</i></a> <a href="#"
+											onclick="javascript:deleteHeadExaminer(${sub.id});return false;"
+											class="delete" title="Delete" data-toggle="tooltip"><i
+												class="material-icons">&#xE872;</i></a></td>
+									</tr>
+								</c:forEach>
+
 							</tbody>
 						</table>
 					</div>
 				</div>
 			</div>
 		</div>
+	</div>
+	<div class="form-popup" id="uploadForm">
+		<form action="#" class="form-container" enctype="multipart/form-data"
+			method="post" id="headExaminerUploadForm">
+			<h1>Upload File</h1>
+			<input type="file" name="file" id="file" placeholder="Select file"
+				required="required"> <input type="submit" class="btn"
+				id="headExaminerAjaxCallUpload" value="Upload" />
+			<button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+		</form>
 	</div>
 	<!-- Footer Start -->
 
@@ -186,6 +125,8 @@
 	<script src="js/plugins.js"></script>
 	<script src="js/main.js"></script>
 	<script src="js/counter.js"></script>
+
+	<script src="js/common.js"></script>
 </body>
 
 </html>

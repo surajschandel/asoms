@@ -84,7 +84,6 @@ public class SubjectsController {
 	public String uploadSubject(@RequestParam("file") MultipartFile file,ModelMap model, @AuthenticationPrincipal MyUserDetails userDetails) {
 		LOG.info("upload Subject: {}" , file.getName());
 		try {
-			System.out.println("Filename="+file.getOriginalFilename());
 			User user=userDetails.getUser();
 			subjectsService.uploadCsvFileData(file, user.getUserId());
 			model.addAttribute("success", "File uploaded successfully");

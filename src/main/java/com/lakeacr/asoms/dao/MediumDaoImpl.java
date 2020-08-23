@@ -10,9 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.lakeacr.asoms.domain.Medium;
-import com.lakeacr.asoms.repository.LocationRepository;
 import com.lakeacr.asoms.repository.MediumRepository;
-import com.lakeacr.asoms.repository.SubjectRepository;
 
 /**
  * @author SURAJ CHANDEL

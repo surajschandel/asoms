@@ -11,8 +11,7 @@
 <meta name="author" content="Suraj Singh">
 
 <!-- Title Page-->
-<title>Evaluation Center - Answer Script On Screen Marking
-	System</title>
+<title>Paper- Answer Script On Screen Marking System</title>
 
 <!-- Icons font CSS-->
 <link
@@ -47,28 +46,43 @@
 			<div class="card card-1">
 				<div class="card-heading"></div>
 				<div class="card-body">
-					<h2 class="title">Evaluation Center Info</h2>
+					<h2 class="title">Paper Info</h2>
 
 					<h2 class="title" style="color: green;">${success}</h2>
 					<h2 class="title" style="color: red;">${error}</h2>
-					<form:form method="POST" action="/save-center" command="command">
+					<form:form method="POST" action="/save-paper"
+						command="command">
 						<div class="input-group">
-							<form:input class="input--style-1" type="text"
-								placeholder="CENTER NAME" path="centerName" />
+							<form:input class="input--style-1" type="text" placeholder="NAME"
+								path="name" />
 							<form:hidden path="id" />
 						</div>
 
 						<div class="input-group">
 							<form:input class="input--style-1" type="text"
-								placeholder="CENTER CODE" path="centerCode" />
+								placeholder="PAPER CODE" path="paperCode" />
 						</div>
-
+						<div class="input-group">
+							<form:input class="input--style-1" type="text"
+								placeholder="REGION CODE" path="regionCode" />
+						</div>
 						<div class="input-group">
 							<div class="rs-select2 js-select-simple select--no-search">
-								<form:select path="locations.id">
-									<form:option value="">LOCATION CODE</form:option>
-									<c:forEach items="${locations}" var="l">
-										<form:option value="${l.id}"> ${l.locationName }</form:option>
+								<form:select path="subjects.id">
+									<form:option value="">SUBJECT</form:option>
+									<c:forEach items="${subjects}" var="l">
+										<form:option value="${l.id}"> ${l.subjectName }</form:option>
+									</c:forEach>
+								</form:select>
+								<div class="select-dropdown"></div>
+							</div>
+						</div>
+						<div class="input-group">
+							<div class="rs-select2 js-select-simple select--no-search">
+								<form:select path="medium.id">
+									<form:option value="">MEDIUM</form:option>
+									<c:forEach items="${mediums}" var="l">
+										<form:option value="${l.id}"> ${l.mediumName }</form:option>
 									</c:forEach>
 								</form:select>
 								<div class="select-dropdown"></div>
@@ -76,24 +90,37 @@
 						</div>
 						<div class="input-group">
 							<form:input class="input--style-1" type="text"
-								placeholder="CONTACT PERSON" path="contactPerson" />
+								placeholder="MAIN ANS SCRIPT PAGE" path="mainAnsScriptPage" />
 						</div>
-
+						
 						<div class="input-group">
 							<form:input class="input--style-1" type="text"
-								placeholder="ADDRESS" path="address" />
+								placeholder="SUPPL ANS SCRIPT PAGE" path="supplAnsScriptPage" />
 						</div>
+						
 						<div class="input-group">
 							<form:input class="input--style-1" type="text"
-								placeholder="PIN CODE" path="pinCode" />
-						</div>
-						<div class="input-group">
-							<form:input class="input--style-1" type="text"
-								placeholder="PHONE NO" path="phoneNo" />
+								placeholder="MODEL QUESTION PAPER" path="modelQuestionPaper" />
 						</div>
 						<div class="input-group">
 							<form:input class="input--style-1" type="text"
-								placeholder="EMAIL ID" path="emailId" />
+								placeholder="MODEL ANSWER" path="modelAnswer" />
+						</div>
+						<div class="input-group">
+							<form:input class="input--style-1" type="text"
+								placeholder="TOTAL MARKS" path="totalMarks" />
+						</div>
+						<div class="input-group">
+							<form:input class="input--style-1" type="text"
+								placeholder="OPTIONAL QUESTION MARKS" path="optionalQuestionMarks" />
+						</div>
+						<div class="input-group">
+							<form:input class="input--style-1" type="text"
+								placeholder="PASSING MARKS" path="passingMarks" />
+						</div>
+						<div class="input-group">
+							<form:input class="input--style-1" type="text"
+								placeholder="MARKING SCHEME" path="markingScheme" />
 						</div>
 						<div class="p-t-20">
 							<button class="btn btn--radius btn--green" type="submit">Submit</button>

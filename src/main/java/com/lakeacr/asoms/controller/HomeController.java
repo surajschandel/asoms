@@ -19,7 +19,11 @@ public class HomeController {
 	
 	@RequestMapping({"/","/index"})
 	public String index(Model model) {
-		model.addAttribute("counts", dashBoardService.dashboardCount());
+		try {
+			model.addAttribute("counts", dashBoardService.dashboardCount());	
+		} catch (Exception e) {
+			LOG.error("Some error to get dashboard count: ",e);
+		}
 		return "index";
 	}
 }
